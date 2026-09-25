@@ -1,7 +1,7 @@
 import path from "node:path";
 import { defineConfig } from "vitest/config";
 
-const alias = { "@": path.resolve(__dirname) };
+const alias = { "@": path.resolve(import.meta.dirname) };
 
 export default defineConfig({
   resolve: { alias },
