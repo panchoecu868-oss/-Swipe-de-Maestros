@@ -6,6 +6,8 @@ import { Board } from "@/components/chess/Board";
 import { DiscardRound, type DiscardSubmission } from "@/components/feed/DiscardRound";
 import { Citation, LessonCard, type CardLesson } from "@/components/feed/LessonCard";
 import { SwipeCard, type Gesture } from "@/components/feed/SwipeCard";
+import { StreakBadge, StreakCelebration, StreakRiskBanner } from "@/components/streak/Streak";
+import { milestoneCrossed } from "@/lib/deck/streak";
 import { PuzzlePlayer, type PuzzleOutcome } from "@/components/puzzle/PuzzlePlayer";
 import { completeReceive, finishDiscard, startDiscard, startReceive, type ClientPuzzle } from "./actions";
 
@@ -27,10 +29,13 @@ interface Props {
   dailyTarget: number;
   dayCompleted: boolean;
   demoLeft: number | null;
-  streak: number;
+  /** Racha acumulada hasta ayer (al cumplir hoy se suma 1). */
+  streakBase: number;
+  /** La racha está en riesgo (tarde y hoy sin cumplir), calculado en servidor con la hora local. */
+  streakAtRiskHourReached: boolean;
 }
 
-export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayCompleted, demoLeft, streak }: Props) {
+export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayCompleted, demoLeft, streakBase, streakAtRiskHourReached }: Props) {
   const router = useRouter();
   const [cards, setCards] = useState(initialCards);
   const [mode, setMode] = useState<Mode>({ kind: "deck" });
@@ -38,6 +43,14 @@ export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayComple
   const [error, setError] = useState<string | null>(null);
   const [paywall, setPaywall] = useState(demoLeft === 0);
   const [pending, startTransition] = useTransition();
+  const [celebrate, setCelebrate] = useState(false);
+  const streak = streakBase + (progress.completed ? 1 : 0);
+
+  /** Actualiza el progreso y celebra si este gesto cumplió el día. */
+  function updateProgress(r: { cardsResolved: number; dayCompleted: boolean }) {
+    if (!progress.completed && r.dayCompleted) setCelebrate(true);
+    setProgress({ resolved: r.cardsResolved, completed: r.dayCompleted });
+  }
   const current = cards[0];
 
   function handleError(e: unknown) {
@@ -83,7 +96,7 @@ export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayComple
     startTransition(async () => {
       try {
         const r = await completeReceive({ lessonId: current.lesson.id, puzzleId: checkpoint?.id ?? null, moves: o?.moves ?? [], ms: o?.ms ?? 0 });
-        setProgress({ resolved: r.cardsResolved, completed: r.dayCompleted });
+        updateProgress(r);
         setMode({
           kind: "result",
           tone: r.solved ? "good" : "bad",
@@ -101,7 +114,7 @@ export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayComple
     startTransition(async () => {
       try {
         const r = await finishDiscard({ roundId, submitted: s.submitted });
-        setProgress({ resolved: r.cardsResolved, completed: r.dayCompleted });
+        updateProgress(r);
         setMode({
           kind: "result",
           tone: r.won ? "good" : "bad",
@@ -120,12 +133,14 @@ export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayComple
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col items-center gap-4 px-4 py-4">
       <header className="flex w-full items-center justify-between text-sm">
-        <Link href="/progreso" className="underline-offset-2 hover:underline">Racha: {streak} 🔥</Link>
+        <StreakBadge current={streak} completedToday={progress.completed} atRisk={streakAtRiskHourReached && !progress.completed} />
         <p aria-live="polite">
           Hoy: <strong>{Math.min(progress.resolved, dailyTarget)}</strong>/{dailyTarget}
           {progress.completed && " ✓ día cumplido"}
         </p>
       </header>
+      {celebrate && <StreakCelebration streak={streak} milestone={milestoneCrossed(streakBase, streak)} onClose={() => setCelebrate(false)} />}
+      {streakAtRiskHourReached && !progress.completed && <StreakRiskBanner current={streakBase} remainingCards={Math.max(0, dailyTarget - progress.resolved)} />}
       {demoLeft !== null && !paywall && <p className="text-xs text-muted">Modo demo: te quedan {demoLeft} cartas gratis.</p>}
       {error && <p role="alert" className="w-full rounded-lg border border-danger p-2 text-sm text-danger">{error}</p>}
 

@@ -1,5 +1,6 @@
 import { GAME_CONFIG } from "@/config/game";
-import { currentStreak } from "@/lib/deck/streak";
+import { streakState } from "@/lib/deck/streak";
+import { localHour } from "@/lib/time";
 import { getOrCreateDeck, lifetimeResolvedCount, LESSON_PUBLIC_COLUMNS, requireUserContext } from "@/lib/cards/server";
 import { FeedClient, type FeedCard } from "./feed-client";
 
@@ -16,7 +17,7 @@ export default async function FeedPage() {
     ctx.db.from("daily_log").select("cards_resolved, completed").eq("user_id", ctx.userId).eq("local_day", ctx.today).maybeSingle(),
     ctx.db.from("daily_log").select("local_day").eq("user_id", ctx.userId).eq("completed", true),
   ]);
-  const streak = currentStreak((completedDays.data ?? []).map((d) => d.local_day as string), ctx.today);
+  const streak = streakState((completedDays.data ?? []).map((d) => d.local_day as string), ctx.today, localHour(ctx.timezone));
   const done = new Set((resolvedToday.data ?? []).map((r) => r.lesson_id as string));
   const forced = new Set((states.data ?? []).filter((s) => s.forced_until_seen).map((s) => s.lesson_id as string));
   const byId = new Map((lessons.data ?? []).map((l) => [l.id as string, l]));
@@ -37,7 +38,8 @@ export default async function FeedPage() {
       dailyTarget={GAME_CONFIG.DAILY_DECK_SIZE}
       dayCompleted={log.data?.completed ?? false}
       demoLeft={demoLeft}
-      streak={streak}
+      streakBase={streak.base}
+      streakAtRiskHourReached={streak.atRisk}
     />
   );
 }

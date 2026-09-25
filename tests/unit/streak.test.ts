@@ -20,3 +20,38 @@ describe("rachas", () => {
     ]);
   });
 });
+
+import { milestoneCrossed, streakState } from "@/lib/deck/streak";
+import { localHour } from "@/lib/time";
+
+describe("estado de la racha", () => {
+  const ms = [{ days: 3, label: "A" }, { days: 7, label: "B" }];
+  const run = ["2026-01-04", "2026-01-05", "2026-01-06"];
+
+  it("antes de cumplir hoy: base = racha hasta ayer, no en riesgo temprano", () => {
+    const s = streakState(run, "2026-01-07", 10, ms, 20);
+    expect(s).toMatchObject({ current: 3, base: 3, completedToday: false, atRisk: false });
+    expect(s.next).toEqual({ days: 7, label: "B", remaining: 4 });
+    expect(s.reached.map((m) => m.days)).toEqual([3]);
+  });
+  it("en riesgo desde la hora configurada", () => {
+    expect(streakState(run, "2026-01-07", 21, ms, 20).atRisk).toBe(true);
+  });
+  it("al cumplir hoy la racha incluye hoy", () => {
+    const s = streakState([...run, "2026-01-07"], "2026-01-07", 21, ms, 20);
+    expect(s).toMatchObject({ current: 4, base: 3, completedToday: true, atRisk: false });
+  });
+  it("racha rota: sin riesgo porque no hay nada que perder", () => {
+    expect(streakState(run, "2026-01-09", 23, ms, 20)).toMatchObject({ current: 0, base: 0, atRisk: false, longest: 3 });
+  });
+  it("detecta el hito que se cruza", () => {
+    expect(milestoneCrossed(2, 3, ms)?.days).toBe(3);
+    expect(milestoneCrossed(3, 4, ms)).toBeNull();
+    expect(milestoneCrossed(6, 7, ms)?.label).toBe("B");
+  });
+  it("hora local por zona horaria", () => {
+    const t = new Date("2026-03-01T03:30:00Z");
+    expect(localHour("America/Guayaquil", t)).toBe(22);
+    expect(localHour("UTC", t)).toBe(3);
+  });
+});

@@ -1,3 +1,4 @@
+import { STREAK_AT_RISK_HOUR, STREAK_MILESTONES } from "@/config/streak";
 import { addDays } from "@/lib/time";
 
 /**
@@ -40,4 +41,52 @@ export function calendar(completedDays: Iterable<string>, today: string, n: numb
     const day = addDays(today, i - n + 1);
     return { day, completed: set.has(day) };
   });
+}
+
+export interface Milestone {
+  days: number;
+  label: string;
+}
+
+export interface StreakState {
+  /** Racha que se muestra (incluye hoy si ya se cumplió). */
+  current: number;
+  /** Racha acumulada hasta ayer: al cumplir hoy pasa a base + 1. */
+  base: number;
+  completedToday: boolean;
+  /** Hay racha viva, hoy no se cumplió y ya es tarde. */
+  atRisk: boolean;
+  longest: number;
+  next: (Milestone & { remaining: number }) | null;
+  reached: Milestone[];
+}
+
+export function streakState(
+  completedDays: Iterable<string>,
+  today: string,
+  hour: number,
+  milestones: Milestone[] = STREAK_MILESTONES,
+  atRiskHour = STREAK_AT_RISK_HOUR,
+): StreakState {
+  const days = [...new Set(completedDays)];
+  const set = new Set(days);
+  const completedToday = set.has(today);
+  const current = currentStreak(set, today);
+  const base = completedToday ? current - 1 : current;
+  const longest = longestStreak(days);
+  const nextM = milestones.find((m) => m.days > current) ?? null;
+  return {
+    current,
+    base,
+    completedToday,
+    atRisk: !completedToday && base > 0 && hour >= atRiskHour,
+    longest,
+    next: nextM ? { ...nextM, remaining: nextM.days - current } : null,
+    reached: milestones.filter((m) => m.days <= longest),
+  };
+}
+
+/** Hito que se cruza al pasar de `before` a `after` días (para celebrarlo), o null. */
+export function milestoneCrossed(before: number, after: number, milestones: Milestone[] = STREAK_MILESTONES): Milestone | null {
+  return [...milestones].reverse().find((m) => before < m.days && after >= m.days) ?? null;
 }
