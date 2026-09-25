@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5f0;
+  --foreground: #1c1a17;
+  --surface: #ffffff;
+  --muted: #6b665d;
+  --accent: #2f6f4f;
+  --accent-contrast: #ffffff;
+  --danger: #b3261e;
+  --border: #e3ded3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #12110f;
+    --foreground: #ece8df;
+    --surface: #1d1b18;
+    --muted: #a39d91;
+    --accent: #5fb488;
+    --accent-contrast: #0c1a12;
+    --danger: #f2837a;
+    --border: #34302a;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-danger: var(--danger);
+  --color-border: var(--border);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-xl bg-accent px-4 py-3 font-semibold text-accent-contrast transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply rounded-xl border border-border bg-surface px-4 py-3 font-semibold transition hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+  .input {
+    @apply rounded-lg border border-border bg-surface px-3 py-2 text-base focus-visible:outline-2 focus-visible:outline-accent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
