@@ -86,7 +86,7 @@ export function PuzzlePlayer({ puzzle, onDone, disabled, opponentDelayMs = 450 }
   const color = session.prepared.playerColor;
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-2" data-puzzle-id={puzzle.id} data-phase={phase}>
       <p aria-live="polite" className="text-sm font-medium">
         {phase === "intro" && "Mira la jugada del rival…"}
         {phase === "playing" && `Juegan las ${color === "white" ? "blancas" : "negras"}: encuentra la mejor jugada`}

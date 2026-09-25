@@ -55,3 +55,12 @@ describe("objetivos", () => {
     expect(judge({ objective: "survive", targetMoves: 10, playerMoves: 4, gameOver: null, evals: [0] }).status).toBe("ongoing");
   });
 });
+
+import { pieceLabel } from "@/components/chess/Board";
+describe("nombres accesibles de piezas", () => {
+  it("concuerda género y color", () => {
+    expect(pieceLabel("bQ", "a8")).toBe("Dama negra en a8");
+    expect(pieceLabel("wN", "f3")).toBe("Caballo blanco en f3");
+    expect(pieceLabel("wR", "a1")).toBe("Torre blanca en a1");
+  });
+});

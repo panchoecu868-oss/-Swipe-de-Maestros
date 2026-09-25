@@ -119,7 +119,7 @@ export function EngineGame({ startFen, lessonType, engineMode, onFinished }: Pro
   const playerMoves = Math.ceil(plies / 2);
 
   return (
-    <section className="flex w-full flex-col items-center gap-3">
+    <section className="flex w-full flex-col items-center gap-3" data-game-status={status}>
       <p aria-live="polite" className="text-center text-sm font-medium">
         {status === "loading" && "Cargando Stockfish y evaluando la posición…"}
         {objective && status !== "done" && OBJECTIVE_TEXT[objective.objective](objective.targetMoves)}

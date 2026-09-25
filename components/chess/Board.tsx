@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess, type Square } from "chess.js";
 
@@ -21,6 +21,17 @@ const COLORS = {
   selected: "rgba(33, 150, 243, 0.45)",
 };
 
+const PIECE_NAMES: Record<string, [string, "m" | "f"]> = {
+  K: ["Rey", "m"], Q: ["Dama", "f"], R: ["Torre", "f"], B: ["Alfil", "m"], N: ["Caballo", "m"], P: ["Peón", "m"],
+};
+
+/** "bQ" + "a8" → "Dama negra en a8" (nombre accesible para las piezas arrastrables). */
+export function pieceLabel(code: string, square: string): string {
+  const [name, g] = PIECE_NAMES[code[1]] ?? ["Pieza", "f"];
+  const color = code[0] === "w" ? (g === "f" ? "blanca" : "blanco") : g === "f" ? "negra" : "negro";
+  return `${name} ${color} en ${square}`;
+}
+
 /** Promoción automática a dama (el caso común); el resto de promociones llega con la jugada UCI completa. */
 function toUci(fen: string, from: string, to: string): string | null {
   const chess = new Chess(fen);
@@ -35,6 +46,29 @@ function toUci(fen: string, from: string, to: string): string | null {
 export function Board({ fen, orientation = "white", onMove, highlight, id = "board", label }: BoardProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const interactive = Boolean(onMove);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // react-chessboard (dnd-kit) envuelve cada pieza en role="button" sin nombre: se lo damos,
+  // y en tableros de solo lectura las sacamos del orden de tabulación.
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const label = () => {
+      root.querySelectorAll<HTMLElement>('[role="button"]').forEach((el) => {
+        const piece = el.querySelector<HTMLElement>("[data-piece]");
+        const sq = piece?.id.split("-").pop();
+        if (piece && sq) el.setAttribute("aria-label", pieceLabel(piece.dataset.piece ?? "", sq));
+        if (!interactive) {
+          el.setAttribute("tabindex", "-1");
+          el.setAttribute("aria-disabled", "true");
+        }
+      });
+    };
+    label();
+    const mo = new MutationObserver(label);
+    mo.observe(root, { childList: true, subtree: true });
+    return () => mo.disconnect();
+  }, [interactive, fen]);
 
   const squareStyles = useMemo(() => {
     const s: Record<string, React.CSSProperties> = {};
@@ -51,7 +85,14 @@ export function Board({ fen, orientation = "white", onMove, highlight, id = "boa
   }
 
   return (
-    <div role="img" aria-label={label ?? `Tablero de ajedrez. Posición: ${fen}`} className="aspect-square w-full max-w-[min(92vw,480px)]">
+    <div
+      ref={ref}
+      role="group"
+      aria-label={label ?? `Tablero de ajedrez. Posición: ${fen}`}
+      data-board-id={id}
+      data-fen={fen}
+      className="aspect-square w-full max-w-[min(92vw,480px)]"
+    >
       <Chessboard
         options={{
           id,
