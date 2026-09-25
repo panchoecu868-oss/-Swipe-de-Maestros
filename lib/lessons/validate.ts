@@ -92,6 +92,8 @@ export function validateLesson(draft: LessonDraft, src: ChapterSource): Validati
     errors.push((e as Error).message);
   }
 
+  if (draft.topics.length === 0) errors.push("sin topics");
+  if (draft.type === "apertura" && !draft.topics.includes("aperturas")) errors.push("lección de apertura sin topic aperturas");
   for (const t of draft.lichess_themes) if (!isLichessTheme(t)) errors.push(`tema desconocido: ${t}`);
   for (const t of draft.opening_tags) if (!/^[A-Z][A-Za-z0-9_]*$/.test(t)) errors.push(`opening_tag con formato inválido: ${t}`);
   if (draft.type === "apertura" && draft.opening_tags.length === 0) errors.push("lección de apertura sin opening_tags");

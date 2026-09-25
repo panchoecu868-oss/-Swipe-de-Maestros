@@ -39,11 +39,11 @@ export async function insertLesson(db: Client, i: InsertLessonInput): Promise<st
   await db.query("begin");
   try {
     const { rows } = await db.query<{ id: string }>(
-      `insert into public.lessons (type, title, summary, body, fen, lichess_themes, opening_tags, elo_min, elo_max,
+      `insert into public.lessons (type, title, summary, body, fen, lichess_themes, opening_tags, topics, elo_min, elo_max,
          book_id, chapter, page_start, page_end, reviewed, dedupe_key)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,false,$14)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,false,$15)
        on conflict (dedupe_key) do nothing returning id`,
-      [d.type, d.title, d.summary, d.body, i.lesson.fen, d.lichess_themes, d.opening_tags, d.elo_min, d.elo_max,
+      [d.type, d.title, d.summary, d.body, i.lesson.fen, d.lichess_themes, d.opening_tags, d.topics, d.elo_min, d.elo_max,
         i.bookId, i.chapter, d.page_start, d.page_end, dedupeKey],
     );
     if (rows.length === 0) {

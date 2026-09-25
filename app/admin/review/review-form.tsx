@@ -12,6 +12,7 @@ export interface ReviewLesson {
   body: string;
   fen: string;
   lichess_themes: string[];
+  topics: string[];
   opening_tags: string[];
   elo_min: number;
   elo_max: number;
@@ -84,6 +85,7 @@ export function ReviewForm({ lesson }: { lesson: ReviewLesson }) {
           FEN {!fenIsValid(fen) && <span className="text-danger">inválido</span>}
           <input name="fen" value={fen} onChange={(e) => setFen(e.target.value)} className="input font-mono text-xs" required />
         </label>
+        <label className="flex flex-col gap-1 text-sm">Temas (autoevaluación)<input name="topics" defaultValue={lesson.topics.join(", ")} className="input" /></label>
         <label className="flex flex-col gap-1 text-sm">Temas Lichess<input name="lichess_themes" defaultValue={lesson.lichess_themes.join(", ")} className="input" /></label>
         <label className="flex flex-col gap-1 text-sm">Opening tags<input name="opening_tags" defaultValue={lesson.opening_tags.join(", ")} className="input" /></label>
         <div className="flex gap-3">

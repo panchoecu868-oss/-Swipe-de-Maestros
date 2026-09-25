@@ -9,6 +9,7 @@ import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { LESSON_PIPELINE } from "@/config/lessons";
 import { LICHESS_THEMES } from "@/config/lichess-themes";
 import { GAME_CONFIG } from "@/config/game";
+import { ALL_TOPICS, OPENING_TOPIC } from "@/config/self-assessment";
 import { LessonBatchSchema, type LessonDraft } from "./schema";
 
 export interface GenerationInput {
@@ -44,7 +45,8 @@ Reglas obligatorias (una lección que las incumpla se descarta automáticamente)
 5. body: máximo ${GAME_CONFIG.LESSON_MAX_WORDS} palabras. summary: máximo ${LESSON_PIPELINE.SUMMARY_MAX_WORDS} palabras. Español neutro.
 6. type: "apertura" | "estrategia" | "final". Las de apertura llevan opening_tags con los nombres de familia de Lichess (ej. "Sicilian_Defense", "Queens_Gambit_Declined"), solo si el texto nombra esa apertura.
 7. lichess_themes: solo temas de esta lista que correspondan a la idea del texto: ${LICHESS_THEMES.join(", ")}.
-8. elo_min/elo_max dentro de ${GAME_CONFIG.ELO_MIN}–${GAME_CONFIG.ELO_MAX}, según la dificultad del material.
+8. topics: 1 a 3 temas de esta lista que la lección trabaja (las de apertura llevan "${OPENING_TOPIC}"): ${ALL_TOPICS.map((t) => `${t.id} (${t.label})`).join(", ")}, ${OPENING_TOPIC}.
+9. elo_min/elo_max dentro de ${GAME_CONFIG.ELO_MIN}–${GAME_CONFIG.ELO_MAX}, según la dificultad del material.
 Si el capítulo no da para ninguna lección que cumpla todo, devuelve lessons: [].`;
 
 export function renderChapter(input: GenerationInput): string {

@@ -1,5 +1,8 @@
 import { z } from "zod";
 import { LICHESS_THEMES } from "@/config/lichess-themes";
+import { OPENING_TOPIC, TOPIC_IDS } from "@/config/self-assessment";
+
+export const LESSON_TOPICS = [...TOPIC_IDS, OPENING_TOPIC] as const;
 
 /**
  * Forma que el modelo DEBE devolver (structured outputs).
@@ -21,6 +24,8 @@ export const LessonDraftSchema = z.object({
     /** Jugadas en SAN (convertidas si el libro usa notación descriptiva). */
     moves_san: z.array(z.string()),
   }),
+  /** Temas de autoevaluación que trabaja la lección (conecta con theme_weights). */
+  topics: z.array(z.enum(LESSON_TOPICS)),
   lichess_themes: z.array(z.enum(LICHESS_THEMES)),
   opening_tags: z.array(z.string()),
   elo_min: z.number().int(),

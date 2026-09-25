@@ -6,6 +6,7 @@ const ok = {
   summary: "s",
   body: "b",
   fen: "4k3/8/8/8/8/8/8/R3K3 w - - 0 1",
+  topics: ["finales_torres"],
   lichess_themes: ["rookEndgame"],
   opening_tags: [],
   elo_min: 1000,

@@ -2,6 +2,7 @@ import { Chess } from "chess.js";
 import { z } from "zod";
 import { GAME_CONFIG } from "@/config/game";
 import { LICHESS_THEMES } from "@/config/lichess-themes";
+import { LESSON_TOPICS } from "./schema";
 import { wordCount } from "./text";
 
 /** Ediciones permitidas en /admin/review, validadas igual que en el pipeline. */
@@ -20,6 +21,7 @@ export const LessonEditSchema = z
         return false;
       }
     }, "FEN inválido"),
+    topics: z.array(z.enum(LESSON_TOPICS)).min(1, "Al menos un tema"),
     lichess_themes: z.array(z.enum(LICHESS_THEMES)),
     opening_tags: z.array(z.string().regex(/^[A-Z][A-Za-z0-9_]*$/)),
     elo_min: z.number().int().min(GAME_CONFIG.ELO_MIN).max(GAME_CONFIG.ELO_MAX),

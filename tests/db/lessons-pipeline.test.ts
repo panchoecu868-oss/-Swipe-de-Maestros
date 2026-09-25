@@ -20,6 +20,7 @@ const valid = (page: number): LessonDraft => ({
   summary: "Resumen propio.",
   body: "Cuerpo propio de prueba.",
   position: { source: "moves_from_start", quote: "1 e4 e5 2 Nf3 Nc6", start_fen: null, moves_san: ["e4", "e5", "Nf3", "Nc6"] },
+  topics: ["aperturas"],
   lichess_themes: ["opening"],
   opening_tags: ["Test_Opening"],
   elo_min: 1000,

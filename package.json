@@ -14,7 +14,8 @@
     "e2e": "playwright test",
     "db:push": "tsx scripts/db-push.ts",
     "import:puzzles": "tsx scripts/import-puzzles.ts",
-    "build:lessons": "tsx scripts/build-lessons.ts"
+    "build:lessons": "tsx scripts/build-lessons.ts",
+    "gen:openings": "tsx scripts/gen-opening-families.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

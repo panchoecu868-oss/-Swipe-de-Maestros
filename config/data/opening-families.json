@@ -1,0 +1,1646 @@
+[
+ {
+  "key": "Alekhine_Defense",
+  "name": "Alekhine Defense",
+  "firstMoves": [
+   "e4",
+   "Nf6"
+  ],
+  "lines": 56
+ },
+ {
+  "key": "Amar_Opening",
+  "name": "Amar Opening",
+  "firstMoves": [
+   "Nh3"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Amazon_Attack",
+  "name": "Amazon Attack",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "Qd3"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Amsterdam_Attack",
+  "name": "Amsterdam Attack",
+  "firstMoves": [
+   "e3",
+   "e5",
+   "c4",
+   "d6",
+   "Nc3",
+   "Nc6",
+   "b3",
+   "Nf6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Anderssens_Opening",
+  "name": "Anderssen's Opening",
+  "firstMoves": [
+   "a3"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Australian_Defense",
+  "name": "Australian Defense",
+  "firstMoves": [
+   "d4",
+   "Na6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Barnes_Defense",
+  "name": "Barnes Defense",
+  "firstMoves": [
+   "e4",
+   "f6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Barnes_Opening",
+  "name": "Barnes Opening",
+  "firstMoves": [
+   "f3"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Basque_Opening",
+  "name": "Basque Opening",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "b3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Benko_Gambit",
+  "name": "Benko Gambit",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "c5",
+   "d5",
+   "b5"
+  ],
+  "lines": 8
+ },
+ {
+  "key": "Benko_Gambit_Accepted",
+  "name": "Benko Gambit Accepted",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "c5",
+   "d5",
+   "b5",
+   "cxb5",
+   "a6"
+  ],
+  "lines": 10
+ },
+ {
+  "key": "Benko_Gambit_Declined",
+  "name": "Benko Gambit Declined",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "c5",
+   "d5",
+   "b5",
+   "Bg5"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Benoni_Defense",
+  "name": "Benoni Defense",
+  "firstMoves": [
+   "d4",
+   "c5"
+  ],
+  "lines": 61
+ },
+ {
+  "key": "Bird_Opening",
+  "name": "Bird Opening",
+  "firstMoves": [
+   "f4"
+  ],
+  "lines": 28
+ },
+ {
+  "key": "Bishops_Opening",
+  "name": "Bishop's Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Bc4"
+  ],
+  "lines": 41
+ },
+ {
+  "key": "Blackmar-Diemer_Gambit",
+  "name": "Blackmar-Diemer Gambit",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "e4"
+  ],
+  "lines": 18
+ },
+ {
+  "key": "Blackmar-Diemer_Gambit_Accepted",
+  "name": "Blackmar-Diemer Gambit Accepted",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "e4",
+   "dxe4",
+   "Nc3",
+   "Nf6",
+   "f3",
+   "exf3"
+  ],
+  "lines": 22
+ },
+ {
+  "key": "Blackmar-Diemer_Gambit_Declined",
+  "name": "Blackmar-Diemer Gambit Declined",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "e4",
+   "dxe4",
+   "Nc3",
+   "Nf6",
+   "f3",
+   "c5"
+  ],
+  "lines": 9
+ },
+ {
+  "key": "Blumenfeld_Countergambit",
+  "name": "Blumenfeld Countergambit",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "c5",
+   "d5",
+   "b5"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Blumenfeld_Countergambit_Accepted",
+  "name": "Blumenfeld Countergambit Accepted",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "c5",
+   "d5",
+   "b5",
+   "dxe6",
+   "fxe6",
+   "cxb5",
+   "d5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Bogo-Indian_Defense",
+  "name": "Bogo-Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "Bb4+"
+  ],
+  "lines": 21
+ },
+ {
+  "key": "Bongcloud_Attack",
+  "name": "Bongcloud Attack",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Ke2"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Borg_Defense",
+  "name": "Borg Defense",
+  "firstMoves": [
+   "d4",
+   "g5"
+  ],
+  "lines": 5
+ },
+ {
+  "key": "Canard_Opening",
+  "name": "Canard Opening",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "f4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Caro-Kann_Defense",
+  "name": "Caro-Kann Defense",
+  "firstMoves": [
+   "e4",
+   "c6"
+  ],
+  "lines": 110
+ },
+ {
+  "key": "Carr_Defense",
+  "name": "Carr Defense",
+  "firstMoves": [
+   "e4",
+   "h6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Catalan_Opening",
+  "name": "Catalan Opening",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "g3"
+  ],
+  "lines": 32
+ },
+ {
+  "key": "Center_Game",
+  "name": "Center Game",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "d4"
+  ],
+  "lines": 18
+ },
+ {
+  "key": "Center_Game_Accepted",
+  "name": "Center Game Accepted",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "d4",
+   "exd4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Clemenz_Opening",
+  "name": "Clemenz Opening",
+  "firstMoves": [
+   "h3"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Colle_System",
+  "name": "Colle System",
+  "firstMoves": [
+   "Nf3",
+   "c5",
+   "e3",
+   "g6",
+   "d4",
+   "Bg7",
+   "dxc5",
+   "Qa5+"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Creepy_Crawly_Formation",
+  "name": "Creepy Crawly Formation",
+  "firstMoves": [
+   "h3",
+   "d5",
+   "a3",
+   "e5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Czech_Defense",
+  "name": "Czech Defense",
+  "firstMoves": [
+   "e4",
+   "d6",
+   "d4",
+   "Nf6",
+   "Nc3",
+   "c6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Danish_Gambit",
+  "name": "Danish Gambit",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "d4",
+   "exd4",
+   "c3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Danish_Gambit_Accepted",
+  "name": "Danish Gambit Accepted",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "d4",
+   "exd4",
+   "c3",
+   "dxc3"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Danish_Gambit_Declined",
+  "name": "Danish Gambit Declined",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "d4",
+   "exd4",
+   "c3",
+   "d5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Dory_Defense",
+  "name": "Döry Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "Ne4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Dresden_Opening",
+  "name": "Dresden Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "c4",
+   "Nf6",
+   "Nxe5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Duras_Gambit",
+  "name": "Duras Gambit",
+  "firstMoves": [
+   "e4",
+   "f5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Dutch_Defense",
+  "name": "Dutch Defense",
+  "firstMoves": [
+   "d4",
+   "f5"
+  ],
+  "lines": 69
+ },
+ {
+  "key": "East_Indian_Defense",
+  "name": "East Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "g6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Elephant_Gambit",
+  "name": "Elephant Gambit",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "d5"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "English_Defense",
+  "name": "English Defense",
+  "firstMoves": [
+   "d4",
+   "b6"
+  ],
+  "lines": 7
+ },
+ {
+  "key": "English_Opening",
+  "name": "English Opening",
+  "firstMoves": [
+   "c4"
+  ],
+  "lines": 175
+ },
+ {
+  "key": "English_Orangutan",
+  "name": "English Orangutan",
+  "firstMoves": [
+   "c4",
+   "Nf6",
+   "b4"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Englund_Gambit",
+  "name": "Englund Gambit",
+  "firstMoves": [
+   "d4",
+   "e5"
+  ],
+  "lines": 9
+ },
+ {
+  "key": "Englund_Gambit_Declined",
+  "name": "Englund Gambit Declined",
+  "firstMoves": [
+   "d4",
+   "e5",
+   "d5"
+  ],
+  "lines": 7
+ },
+ {
+  "key": "Formation",
+  "name": "Formation",
+  "firstMoves": [
+   "a3",
+   "e5",
+   "b3",
+   "d5",
+   "c3",
+   "Nf6",
+   "d3",
+   "Nc6",
+   "e3",
+   "Bd6",
+   "f3",
+   "O-O",
+   "g3"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Four_Knights_Game",
+  "name": "Four Knights Game",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "Nc3",
+   "Nf6"
+  ],
+  "lines": 49
+ },
+ {
+  "key": "French_Defense",
+  "name": "French Defense",
+  "firstMoves": [
+   "e4",
+   "e6"
+  ],
+  "lines": 212
+ },
+ {
+  "key": "Fried_Fox_Defense",
+  "name": "Fried Fox Defense",
+  "firstMoves": [
+   "e4",
+   "f6",
+   "d4",
+   "Kf7"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Global_Opening",
+  "name": "Global Opening",
+  "firstMoves": [
+   "h3",
+   "e5",
+   "a3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Goldsmith_Defense",
+  "name": "Goldsmith Defense",
+  "firstMoves": [
+   "e4",
+   "h5"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Grob_Opening",
+  "name": "Grob Opening",
+  "firstMoves": [
+   "g4"
+  ],
+  "lines": 20
+ },
+ {
+  "key": "Grunfeld_Defense",
+  "name": "Grünfeld Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "g6",
+   "Nc3",
+   "d5"
+  ],
+  "lines": 59
+ },
+ {
+  "key": "Gunderam_Defense",
+  "name": "Gunderam Defense",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Qe7"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Hippopotamus_Defense",
+  "name": "Hippopotamus Defense",
+  "firstMoves": [
+   "e4",
+   "Nh6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Horwitz_Defense",
+  "name": "Horwitz Defense",
+  "firstMoves": [
+   "d4",
+   "e6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Hungarian_Opening",
+  "name": "Hungarian Opening",
+  "firstMoves": [
+   "g3"
+  ],
+  "lines": 20
+ },
+ {
+  "key": "Indian_Defense",
+  "name": "Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6"
+  ],
+  "lines": 53
+ },
+ {
+  "key": "Irish_Gambit",
+  "name": "Irish Gambit",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "Nxe5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Italian_Game",
+  "name": "Italian Game",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "Bc4"
+  ],
+  "lines": 187
+ },
+ {
+  "key": "Kadas_Opening",
+  "name": "Kádas Opening",
+  "firstMoves": [
+   "h4"
+  ],
+  "lines": 9
+ },
+ {
+  "key": "Kangaroo_Defense",
+  "name": "Kangaroo Defense",
+  "firstMoves": [
+   "d4",
+   "e6",
+   "c4",
+   "Bb4+"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Kings_Gambit",
+  "name": "King's Gambit",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "f4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Kings_Gambit_Accepted",
+  "name": "King's Gambit Accepted",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "f4",
+   "exf4"
+  ],
+  "lines": 137
+ },
+ {
+  "key": "Kings_Gambit_Declined",
+  "name": "King's Gambit Declined",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "f4",
+   "Bc5"
+  ],
+  "lines": 53
+ },
+ {
+  "key": "Kings_Indian_Attack",
+  "name": "King's Indian Attack",
+  "firstMoves": [
+   "Nf3",
+   "d5",
+   "g3"
+  ],
+  "lines": 20
+ },
+ {
+  "key": "Kings_Indian_Attack_with_Bf5",
+  "name": "King's Indian Attack, with Bf5",
+  "firstMoves": [
+   "Nf3",
+   "Nf6",
+   "g3",
+   "d5",
+   "Bg2",
+   "c6",
+   "O-O",
+   "Bf5"
+  ],
+  "lines": 5
+ },
+ {
+  "key": "Kings_Indian_Attack_with_e6",
+  "name": "King's Indian Attack, with e6",
+  "firstMoves": [
+   "Nf3",
+   "Nf6",
+   "g3",
+   "d5",
+   "Bg2",
+   "e6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Kings_Indian_Defense",
+  "name": "King's Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "g6",
+   "g3"
+  ],
+  "lines": 119
+ },
+ {
+  "key": "Kings_Knight_Opening",
+  "name": "King's Knight Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Kings_Pawn_Game",
+  "name": "King's Pawn Game",
+  "firstMoves": [
+   "e4"
+  ],
+  "lines": 38
+ },
+ {
+  "key": "Kings_Pawn_Opening",
+  "name": "King's Pawn Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "b3"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Lasker_Simul_Special",
+  "name": "Lasker Simul Special",
+  "firstMoves": [
+   "g3",
+   "h5"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Latvian_Gambit",
+  "name": "Latvian Gambit",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "f5"
+  ],
+  "lines": 17
+ },
+ {
+  "key": "Latvian_Gambit_Accepted",
+  "name": "Latvian Gambit Accepted",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "f5",
+   "exf5"
+  ],
+  "lines": 9
+ },
+ {
+  "key": "Lemming_Defense",
+  "name": "Lemming Defense",
+  "firstMoves": [
+   "e4",
+   "Na6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Lion_Defense",
+  "name": "Lion Defense",
+  "firstMoves": [
+   "e4",
+   "d6",
+   "d4",
+   "Nf6",
+   "f3"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "London_System",
+  "name": "London System",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "g6",
+   "Bf4"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "London_System_with_Bd3",
+  "name": "London System, with Bd3",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "g6",
+   "Bf4",
+   "Bg7",
+   "e3",
+   "d6",
+   "Bd3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "London_System_with_Be2",
+  "name": "London System, with Be2",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "g6",
+   "Bf4",
+   "Bg7",
+   "e3",
+   "d6",
+   "Be2"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Marienbad_System",
+  "name": "Marienbad System",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "b6",
+   "g3",
+   "Bb7",
+   "Bg2",
+   "c5"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Mexican_Defense",
+  "name": "Mexican Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "Nc6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Mieses_Opening",
+  "name": "Mieses Opening",
+  "firstMoves": [
+   "d3"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "Mikenas_Defense",
+  "name": "Mikenas Defense",
+  "firstMoves": [
+   "d4",
+   "Nc6"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "Modern_Defense",
+  "name": "Modern Defense",
+  "firstMoves": [
+   "e4",
+   "g6"
+  ],
+  "lines": 39
+ },
+ {
+  "key": "Montevideo_Defense",
+  "name": "Montevideo Defense",
+  "firstMoves": [
+   "d4",
+   "Nc6",
+   "d5",
+   "Nb8"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Neo-Grunfeld_Defense",
+  "name": "Neo-Grünfeld Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "g6",
+   "f3",
+   "d5"
+  ],
+  "lines": 16
+ },
+ {
+  "key": "Nimzo-Indian_Defense",
+  "name": "Nimzo-Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nc3",
+   "Bb4"
+  ],
+  "lines": 99
+ },
+ {
+  "key": "Nimzo-Larsen_Attack",
+  "name": "Nimzo-Larsen Attack",
+  "firstMoves": [
+   "b3"
+  ],
+  "lines": 18
+ },
+ {
+  "key": "Nimzowitsch_Defense",
+  "name": "Nimzowitsch Defense",
+  "firstMoves": [
+   "e4",
+   "Nc6"
+  ],
+  "lines": 43
+ },
+ {
+  "key": "Old_Indian_Defense",
+  "name": "Old Indian Defense",
+  "firstMoves": [
+   "d4",
+   "d6",
+   "c4"
+  ],
+  "lines": 14
+ },
+ {
+  "key": "Owen_Defense",
+  "name": "Owen Defense",
+  "firstMoves": [
+   "e4",
+   "b6"
+  ],
+  "lines": 8
+ },
+ {
+  "key": "Paleface_Attack",
+  "name": "Paleface Attack",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "f3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Petrovs_Defense",
+  "name": "Petrov's Defense",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nf6"
+  ],
+  "lines": 50
+ },
+ {
+  "key": "Philidor_Defense",
+  "name": "Philidor Defense",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "d6"
+  ],
+  "lines": 44
+ },
+ {
+  "key": "Pirc_Defense",
+  "name": "Pirc Defense",
+  "firstMoves": [
+   "e4",
+   "d6"
+  ],
+  "lines": 28
+ },
+ {
+  "key": "Polish_Defense",
+  "name": "Polish Defense",
+  "firstMoves": [
+   "d4",
+   "b5"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Polish_Opening",
+  "name": "Polish Opening",
+  "firstMoves": [
+   "b4"
+  ],
+  "lines": 25
+ },
+ {
+  "key": "Polish_Opening_with_d5",
+  "name": "Polish Opening, with d5",
+  "firstMoves": [
+   "b4",
+   "d5"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Ponziani_Opening",
+  "name": "Ponziani Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "c3"
+  ],
+  "lines": 16
+ },
+ {
+  "key": "Portuguese_Opening",
+  "name": "Portuguese Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Bb5"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Pseudo_Queens_Indian_Defense",
+  "name": "Pseudo Queen's Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "b6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Pterodactyl_Defense",
+  "name": "Pterodactyl Defense",
+  "firstMoves": [
+   "d4",
+   "g6",
+   "c4",
+   "Bg7",
+   "Nc3",
+   "c5",
+   "e3"
+  ],
+  "lines": 33
+ },
+ {
+  "key": "Queens_Gambit",
+  "name": "Queen's Gambit",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Queens_Gambit_Accepted",
+  "name": "Queen's Gambit Accepted",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "dxc4"
+  ],
+  "lines": 58
+ },
+ {
+  "key": "Queens_Gambit_Declined",
+  "name": "Queen's Gambit Declined",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "c5"
+  ],
+  "lines": 198
+ },
+ {
+  "key": "Queens_Indian_Accelerated",
+  "name": "Queen's Indian Accelerated",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "b6"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Queens_Indian_Defense",
+  "name": "Queen's Indian Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "b6"
+  ],
+  "lines": 58
+ },
+ {
+  "key": "Queens_Indian_Defense_with_e3",
+  "name": "Queen's Indian Defense, with e3",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "d5",
+   "e3",
+   "b6",
+   "Nc3",
+   "Bb7"
+  ],
+  "lines": 14
+ },
+ {
+  "key": "Queens_Indian_Defense_with_e3_Bb4_Line",
+  "name": "Queen's Indian Defense, with e3, Bb4+ Line",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "e6",
+   "Nf3",
+   "Bb4+",
+   "Nbd2",
+   "b6",
+   "e3",
+   "Bb7"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Queens_Pawn_Game",
+  "name": "Queen's Pawn Game",
+  "firstMoves": [
+   "d4"
+  ],
+  "lines": 82
+ },
+ {
+  "key": "Queens_Pawn_Mengarini_Attack",
+  "name": "Queen's Pawn, Mengarini Attack",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "g6",
+   "Qc2"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Rapport-Jobava_System",
+  "name": "Rapport-Jobava System",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "Nc3",
+   "Nf6",
+   "Bf4"
+  ],
+  "lines": 3
+ },
+ {
+  "key": "Rapport-Jobava_System_with_e6",
+  "name": "Rapport-Jobava System, with e6",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "Nc3",
+   "e6",
+   "Bf4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Rat_Defense",
+  "name": "Rat Defense",
+  "firstMoves": [
+   "e4",
+   "d6",
+   "f4"
+  ],
+  "lines": 11
+ },
+ {
+  "key": "Reti_Opening",
+  "name": "Réti Opening",
+  "firstMoves": [
+   "Nf3",
+   "d5",
+   "c4"
+  ],
+  "lines": 43
+ },
+ {
+  "key": "Richter-Veresov_Attack",
+  "name": "Richter-Veresov Attack",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nc3",
+   "d5",
+   "Bg5"
+  ],
+  "lines": 8
+ },
+ {
+  "key": "Robatsch_Defense",
+  "name": "Robatsch Defense",
+  "firstMoves": [
+   "d4",
+   "d6",
+   "Nf3",
+   "g6",
+   "c4",
+   "Bg7",
+   "e4",
+   "Bg4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Rubinstein_Opening",
+  "name": "Rubinstein Opening",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "e6",
+   "e3",
+   "c5",
+   "Bd3",
+   "d5",
+   "b3"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Ruy_Lopez",
+  "name": "Ruy Lopez",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "Bb5"
+  ],
+  "lines": 235
+ },
+ {
+  "key": "Saragossa_Opening",
+  "name": "Saragossa Opening",
+  "firstMoves": [
+   "c3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Scandinavian_Defense",
+  "name": "Scandinavian Defense",
+  "firstMoves": [
+   "e4",
+   "d5"
+  ],
+  "lines": 45
+ },
+ {
+  "key": "Scotch_Game",
+  "name": "Scotch Game",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "d4"
+  ],
+  "lines": 53
+ },
+ {
+  "key": "Semi-Slav_Defense",
+  "name": "Semi-Slav Defense",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "e6",
+   "Nc3",
+   "c6"
+  ],
+  "lines": 69
+ },
+ {
+  "key": "Semi-Slav_Defense_Accepted",
+  "name": "Semi-Slav Defense Accepted",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "c6",
+   "Nf3",
+   "Nf6",
+   "Nc3",
+   "e6",
+   "Bg5",
+   "dxc4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Sicilian_Defense",
+  "name": "Sicilian Defense",
+  "firstMoves": [
+   "e4",
+   "c5"
+  ],
+  "lines": 391
+ },
+ {
+  "key": "Slav_Defense",
+  "name": "Slav Defense",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "c6"
+  ],
+  "lines": 52
+ },
+ {
+  "key": "Slav_Indian",
+  "name": "Slav Indian",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "c6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Sodium_Attack",
+  "name": "Sodium Attack",
+  "firstMoves": [
+   "Na3"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "St_George_Defense",
+  "name": "St. George Defense",
+  "firstMoves": [
+   "e4",
+   "a6"
+  ],
+  "lines": 4
+ },
+ {
+  "key": "Tarrasch_Defense",
+  "name": "Tarrasch Defense",
+  "firstMoves": [
+   "d4",
+   "d5",
+   "c4",
+   "e6",
+   "Nc3",
+   "c5"
+  ],
+  "lines": 27
+ },
+ {
+  "key": "Three_Knights_Opening",
+  "name": "Three Knights Opening",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nf3",
+   "Nc6",
+   "Nc3"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Torre_Attack",
+  "name": "Torre Attack",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "e6",
+   "Bg5"
+  ],
+  "lines": 6
+ },
+ {
+  "key": "Trompowsky_Attack",
+  "name": "Trompowsky Attack",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Bg5"
+  ],
+  "lines": 10
+ },
+ {
+  "key": "Valencia_Opening",
+  "name": "Valencia Opening",
+  "firstMoves": [
+   "d3",
+   "e5",
+   "Nd2"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Van_Geet_Opening",
+  "name": "Van Geet Opening",
+  "firstMoves": [
+   "Nc3"
+  ],
+  "lines": 33
+ },
+ {
+  "key": "Vant_Kruijs_Opening",
+  "name": "Van't Kruijs Opening",
+  "firstMoves": [
+   "e3"
+  ],
+  "lines": 5
+ },
+ {
+  "key": "Vienna_Gambit_with_Max_Lange_Defense",
+  "name": "Vienna Gambit, with Max Lange Defense",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nc3",
+   "Nc6",
+   "f4"
+  ],
+  "lines": 15
+ },
+ {
+  "key": "Vienna_Game",
+  "name": "Vienna Game",
+  "firstMoves": [
+   "e4",
+   "e5",
+   "Nc3"
+  ],
+  "lines": 41
+ },
+ {
+  "key": "Vulture_Defense",
+  "name": "Vulture Defense",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "c4",
+   "c5",
+   "d5",
+   "Ne4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Wade_Defense",
+  "name": "Wade Defense",
+  "firstMoves": [
+   "d4",
+   "d6",
+   "Nf3",
+   "Bg4"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Ware_Defense",
+  "name": "Ware Defense",
+  "firstMoves": [
+   "e4",
+   "a5"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Ware_Opening",
+  "name": "Ware Opening",
+  "firstMoves": [
+   "a4"
+  ],
+  "lines": 7
+ },
+ {
+  "key": "Yusupov-Rubinstein_System",
+  "name": "Yusupov-Rubinstein System",
+  "firstMoves": [
+   "d4",
+   "Nf6",
+   "Nf3",
+   "e6",
+   "e3"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Zaire_Defense",
+  "name": "Zaire Defense",
+  "firstMoves": [
+   "d4",
+   "Nc6",
+   "d5",
+   "Nb8",
+   "e4",
+   "Nf6",
+   "e5",
+   "Ng8"
+  ],
+  "lines": 1
+ },
+ {
+  "key": "Zukertort_Defense",
+  "name": "Zukertort Defense",
+  "firstMoves": [
+   "Nf3",
+   "Nh6",
+   "d4",
+   "g6"
+  ],
+  "lines": 2
+ },
+ {
+  "key": "Zukertort_Opening",
+  "name": "Zukertort Opening",
+  "firstMoves": [
+   "Nf3"
+  ],
+  "lines": 47
+ }
+]

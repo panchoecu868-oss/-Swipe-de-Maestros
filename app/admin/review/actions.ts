@@ -12,6 +12,7 @@ function editFromForm(form: FormData) {
     summary: form.get("summary"),
     body: form.get("body"),
     fen: String(form.get("fen") ?? "").trim(),
+    topics: splitList(String(form.get("topics") ?? "")),
     lichess_themes: splitList(String(form.get("lichess_themes") ?? "")),
     opening_tags: splitList(String(form.get("opening_tags") ?? "")),
     elo_min: Number(form.get("elo_min")),
