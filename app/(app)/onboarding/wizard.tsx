@@ -129,12 +129,14 @@ export function OnboardingWizard() {
             Atrás
           </button>
         )}
+        {/* Keys distintas: si React reutilizara el mismo <button>, el clic en "Siguiente" del paso 4
+            lo convertiría en submit antes de la acción por defecto y enviaría el formulario incompleto. */}
         {step < STEPS.length - 1 ? (
-          <button type="button" className="btn-primary flex-1" onClick={() => setStep((s) => s + 1)}>
+          <button key="next" type="button" className="btn-primary flex-1" onClick={() => setStep((s) => s + 1)}>
             Siguiente
           </button>
         ) : (
-          <button type="submit" className="btn-primary flex-1" disabled={pending}>
+          <button key="submit" type="submit" className="btn-primary flex-1" disabled={pending}>
             {pending ? "Guardando…" : "Empezar"}
           </button>
         )}
