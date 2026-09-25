@@ -1,0 +1,13 @@
+{
+  "_source": "Ejemplo oficial: github.com/lichess-org/api doc/specs/examples/users-getUserPublicData.json.yaml (recortado)",
+  "id": "mary",
+  "username": "Mary",
+  "perfs": {
+    "bullet": { "games": 207, "rating": 993, "rd": 68, "prog": -6 },
+    "blitz": { "games": 118, "rating": 931, "rd": 53, "prog": 40 },
+    "rapid": { "games": 67, "rating": 1062, "rd": 96, "prog": -27 },
+    "classical": { "games": 328, "rating": 1118, "rd": 49, "prog": -30 },
+    "puzzle": { "games": 210, "rating": 1028, "rd": 54, "prog": 17 }
+  },
+  "url": "https://lichess.org/@/Mary"
+}
