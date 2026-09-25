@@ -1,4 +1,5 @@
 import { GAME_CONFIG } from "@/config/game";
+import { currentStreak } from "@/lib/deck/streak";
 import { getOrCreateDeck, lifetimeResolvedCount, LESSON_PUBLIC_COLUMNS, requireUserContext } from "@/lib/cards/server";
 import { FeedClient, type FeedCard } from "./feed-client";
 
@@ -8,12 +9,14 @@ export default async function FeedPage() {
   const ctx = await requireUserContext();
   const deckIds = await getOrCreateDeck(ctx);
 
-  const [lessons, resolvedToday, states, log] = await Promise.all([
+  const [lessons, resolvedToday, states, log, completedDays] = await Promise.all([
     ctx.db.from("lessons").select(LESSON_PUBLIC_COLUMNS).in("id", deckIds.length ? deckIds : ["00000000-0000-0000-0000-000000000000"]),
     ctx.db.from("card_events").select("lesson_id").eq("user_id", ctx.userId).eq("local_day", ctx.today),
     ctx.db.from("card_states").select("lesson_id, forced_until_seen").eq("user_id", ctx.userId).in("lesson_id", deckIds.length ? deckIds : ["00000000-0000-0000-0000-000000000000"]),
     ctx.db.from("daily_log").select("cards_resolved, completed").eq("user_id", ctx.userId).eq("local_day", ctx.today).maybeSingle(),
+    ctx.db.from("daily_log").select("local_day").eq("user_id", ctx.userId).eq("completed", true),
   ]);
+  const streak = currentStreak((completedDays.data ?? []).map((d) => d.local_day as string), ctx.today);
   const done = new Set((resolvedToday.data ?? []).map((r) => r.lesson_id as string));
   const forced = new Set((states.data ?? []).filter((s) => s.forced_until_seen).map((s) => s.lesson_id as string));
   const byId = new Map((lessons.data ?? []).map((l) => [l.id as string, l]));
@@ -34,6 +37,7 @@ export default async function FeedPage() {
       dailyTarget={GAME_CONFIG.DAILY_DECK_SIZE}
       dayCompleted={log.data?.completed ?? false}
       demoLeft={demoLeft}
+      streak={streak}
     />
   );
 }

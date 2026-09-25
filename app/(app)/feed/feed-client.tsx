@@ -27,9 +27,10 @@ interface Props {
   dailyTarget: number;
   dayCompleted: boolean;
   demoLeft: number | null;
+  streak: number;
 }
 
-export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayCompleted, demoLeft }: Props) {
+export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayCompleted, demoLeft, streak }: Props) {
   const router = useRouter();
   const [cards, setCards] = useState(initialCards);
   const [mode, setMode] = useState<Mode>({ kind: "deck" });
@@ -119,7 +120,7 @@ export function FeedClient({ initialCards, resolvedToday, dailyTarget, dayComple
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col items-center gap-4 px-4 py-4">
       <header className="flex w-full items-center justify-between text-sm">
-        <Link href="/progreso" className="underline-offset-2 hover:underline">Progreso</Link>
+        <Link href="/progreso" className="underline-offset-2 hover:underline">Racha: {streak} 🔥</Link>
         <p aria-live="polite">
           Hoy: <strong>{Math.min(progress.resolved, dailyTarget)}</strong>/{dailyTarget}
           {progress.completed && " ✓ día cumplido"}
