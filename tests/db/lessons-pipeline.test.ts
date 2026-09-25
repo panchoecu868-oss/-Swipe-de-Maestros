@@ -19,7 +19,7 @@ const valid = (page: number): LessonDraft => ({
   title: "Lección sintética válida",
   summary: "Resumen propio.",
   body: "Cuerpo propio de prueba.",
-  position: { source: "moves_from_start", quote: "1 e4 e5 2 Nf3 Nc6", start_fen: null, moves_san: ["e4", "e5", "Nf3", "Nc6"] },
+  position: { source: "moves_from_start", quote: "1 e4 e5 2 Nf3 Nc6", start_fen: null, diagram_number: null, side_to_move: null, moves_san: ["e4", "e5", "Nf3", "Nc6"] },
   topics: ["aperturas"],
   lichess_themes: ["opening"],
   opening_tags: ["Test_Opening"],
@@ -69,7 +69,7 @@ describe("pipeline de libros", () => {
     const logs: PipelineLogEntry[] = [];
     const gen = new FakeGenerator();
     const meta = { title: "Libro sintético", author: "Test", license_note: "fixture" };
-    const stats = await runPipeline({ pdf, meta, generator: gen, db, log: (e) => logs.push(e) });
+    const stats = await runPipeline({ source: { kind: "pdf", bytes: pdf }, meta, generator: gen, db, log: (e) => logs.push(e) });
     expect(stats).toMatchObject({ chapters: 2, generated: 3, inserted: 1, rejected: 2 });
     expect(logs.filter((l) => l.kind === "rejected").map((l) => l.title)).toEqual(["Copia", "Inventada"]);
 
@@ -80,14 +80,14 @@ describe("pipeline de libros", () => {
     const src = await db.query("select position_quote, moves_uci from public.lesson_sources");
     expect(src.rows[0].moves_uci).toEqual(["e2e4", "e7e5", "g1f3", "b8c6"]);
 
-    const again = await runPipeline({ pdf, meta, generator: new FakeGenerator(), db, log: () => {} });
+    const again = await runPipeline({ source: { kind: "pdf", bytes: pdf }, meta, generator: new FakeGenerator(), db, log: () => {} });
     expect(again.duplicates).toBe(1);
     expect((await db.query("select count(*)::int n from public.lessons")).rows[0].n).toBe(1);
   });
 
   it("respeta --max y el filtro de capítulos", async () => {
     const gen = new FakeGenerator();
-    await runPipeline({ pdf, meta: { title: "x", author: "y", license_note: "z" }, generator: gen, db: null, chapterIndexes: [2], log: () => {} });
+    await runPipeline({ source: { kind: "pdf", bytes: pdf }, meta: { title: "x", author: "y", license_note: "z" }, generator: gen, db: null, chapterIndexes: [2], log: () => {} });
     expect(gen.calls.map((c) => c.chapter)).toEqual(["CHAPTER II"]);
   });
 

@@ -17,7 +17,7 @@ const base: LessonDraft = {
   title: "Título propio",
   summary: "Resumen en palabras propias.",
   body: "Cuerpo breve escrito en palabras propias para la prueba.",
-  position: { source: "moves_from_start", quote: "1 e4 e5 2 Nf3 Nc6", start_fen: null, moves_san: ["e4", "e5", "Nf3", "Nc6"] },
+  position: { source: "moves_from_start", quote: "1 e4 e5 2 Nf3 Nc6", start_fen: null, diagram_number: null, side_to_move: null, moves_san: ["e4", "e5", "Nf3", "Nc6"] },
   topics: ["aperturas"],
   lichess_themes: ["opening"],
   opening_tags: ["Test_Opening"],
@@ -87,7 +87,7 @@ describe("validateLesson", () => {
         opening_tags: [],
         topics: ["finales_torres"],
         lichess_themes: ["rookEndgame"],
-        position: { source: "piece_list", quote: "White: Ke1, Ra1. Black: Ke8.", start_fen: "4k3/8/8/8/8/8/8/R3K3 w - - 0 1", moves_san: [] },
+        position: { source: "piece_list", quote: "White: Ke1, Ra1. Black: Ke8.", start_fen: "4k3/8/8/8/8/8/8/R3K3 w - - 0 1", diagram_number: null, side_to_move: null, moves_san: [] },
         page_start: 11,
         page_end: 11,
       },
@@ -98,7 +98,7 @@ describe("validateLesson", () => {
 
   it("buildPosition rechaza FEN inválido", () => {
     expect(() =>
-      buildPosition({ position: { source: "piece_list", quote: "q", start_fen: "no-es-fen", moves_san: [] } }),
+      buildPosition({ position: { source: "piece_list", quote: "q", start_fen: "no-es-fen", diagram_number: null, side_to_move: null, moves_san: [] } }),
     ).toThrow(/FEN inválido/);
   });
 });

@@ -7,11 +7,17 @@ export interface Chapter {
   endPage: number;
 }
 
+export type CitationUnit = "página" | "sección";
+
 export interface ExtractedBook {
   numPages: number;
   pages: Map<number, string>;
   chapters: Chapter[];
   chapterSource: "outline" | "headings" | "chunks";
+  /** Cómo se citan los números de `pages`: página real del libro o sección del texto digital. */
+  citationUnit: CitationUnit;
+  /** Diagramas ASCII parseados (solo en textos que los traen). */
+  diagrams: import("./ascii-diagram").AsciiDiagram[];
 }
 
 type PdfDoc = import("pdfjs-dist/legacy/build/pdf.mjs").PDFDocumentProxy;
@@ -71,10 +77,10 @@ export function headingChapters(pages: Map<number, string>, numPages: number): C
   return toRanges(starts, numPages);
 }
 
-export function chunkChapters(numPages: number, size = LESSON_PIPELINE.FALLBACK_PAGES_PER_CHUNK): Chapter[] {
+export function chunkChapters(numPages: number, size: number = LESSON_PIPELINE.FALLBACK_PAGES_PER_CHUNK, label = "Páginas"): Chapter[] {
   const out: Chapter[] = [];
   for (let p = 1; p <= numPages; p += size) {
-    out.push({ title: `Páginas ${p}-${Math.min(p + size - 1, numPages)}`, startPage: p, endPage: Math.min(p + size - 1, numPages) });
+    out.push({ title: `${label} ${p}-${Math.min(p + size - 1, numPages)}`, startPage: p, endPage: Math.min(p + size - 1, numPages) });
   }
   return out;
 }
@@ -96,7 +102,7 @@ export async function extractBook(data: Uint8Array): Promise<ExtractedBook> {
     chapterSource = "chunks";
   }
   await task.destroy();
-  return { numPages, pages, chapters, chapterSource };
+  return { numPages, pages, chapters, chapterSource, citationUnit: "página", diagrams: [] };
 }
 
 export function chapterPages(book: ExtractedBook, ch: Chapter): Map<number, string> {

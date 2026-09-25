@@ -14,17 +14,30 @@ export interface CardLesson {
   chapter: string;
   page_start: number;
   page_end: number;
-  books: { title: string; author: string; year: number | null } | null;
+  books: { title: string; author: string; year: number | null; citation_unit?: string | null; public_domain?: boolean | null; source_url?: string | null } | null;
 }
 
 const TYPE_LABEL = { apertura: "Apertura", estrategia: "Estrategia", final: "Final" } as const;
 
+/** "p. 51", "pp. 51–52" o, en textos digitales sin paginación, "secc. 12". */
+export function citationRange(unit: string | null | undefined, start: number, end: number): string {
+  const sec = unit === "sección";
+  if (start === end) return `${sec ? "secc." : "p."} ${start}`;
+  return `${sec ? "secc." : "pp."} ${start}–${end}`;
+}
+
 export function Citation({ lesson }: { lesson: CardLesson }) {
-  const pages = lesson.page_start === lesson.page_end ? `p. ${lesson.page_start}` : `pp. ${lesson.page_start}–${lesson.page_end}`;
+  const b = lesson.books;
   return (
     <p className="text-xs text-muted">
-      Fuente: {lesson.books?.author}, <cite>{lesson.books?.title}</cite>
-      {lesson.books?.year ? ` (${lesson.books.year})` : ""}, {lesson.chapter}, {pages}
+      Fuente: {b?.author}, <cite>{b?.title}</cite>
+      {b?.year ? ` (${b.year})` : ""}, {lesson.chapter}, {citationRange(b?.citation_unit, lesson.page_start, lesson.page_end)}
+      {b?.public_domain && (
+        <>
+          {" · "}
+          {b.source_url ? <a href={b.source_url} className="underline" target="_blank" rel="noreferrer">dominio público</a> : "dominio público"}
+        </>
+      )}
     </p>
   );
 }

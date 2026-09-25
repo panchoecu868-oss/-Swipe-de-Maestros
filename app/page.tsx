@@ -7,7 +7,7 @@ import { guaranteeTerms } from "@/lib/guarantee/terms";
 
 const VALUE = [
   { t: `Mazo diario de ${GAME_CONFIG.DAILY_DECK_SIZE} cartas`, d: "Personalizado con tu ELO, tu repertorio y tu autoevaluación. Sin importar tus partidas." },
-  { t: "Lecciones de libros, con cita", d: "Resúmenes de ~1 minuto de libros de ajedrez, cada uno con libro, capítulo y página, revisados a mano." },
+  { t: "Lecciones de los clásicos, con cita", d: "Resúmenes de ~1 minuto de libros de ajedrez (Capablanca, Lasker…), con libro, capítulo y página, revisados a mano." },
   { t: "Puzzles reales de Lichess", d: "De la base oficial de puzzles de Lichess, del mismo motivo que la lección y en tu rango." },
   { t: "Stockfish a tu medida", d: "Juega cada posición contra Stockfish con fuerza limitada a tu nivel y un objetivo claro." },
   { t: "Repetición espaciada", d: "Lo que recibes vuelve justo cuando lo estás por olvidar (SM-2)." },
@@ -101,6 +101,7 @@ export default function Home() {
       </section>
 
       <footer className="flex flex-wrap justify-center gap-4 border-t border-border pt-6 text-sm text-muted">
+        <Link href="/libros">Biblioteca</Link>
         <Link href="/garantia/terminos">Términos de la garantía</Link>
         <Link href="/licencias">Licencias</Link>
         <Link href="/registro">Crear cuenta</Link>

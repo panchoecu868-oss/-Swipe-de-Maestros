@@ -15,8 +15,15 @@ export const LessonDraftSchema = z.object({
   summary: z.string(),
   body: z.string(),
   position: z.object({
-    /** moves_from_start: jugadas desde la posición inicial. piece_list: el texto describe las piezas. */
-    source: z.enum(["moves_from_start", "piece_list"]),
+    /**
+     * moves_from_start: jugadas desde la posición inicial. piece_list: el texto enumera las piezas.
+     * diagram: el libro trae el diagrama dibujado (texto de Gutenberg); el FEN lo calcula el parser, no el modelo.
+     */
+    source: z.enum(["moves_from_start", "piece_list", "diagram"]),
+    /** Solo para diagram: número del diagrama ("Diag. 4" → 4). */
+    diagram_number: z.number().int().nullable(),
+    /** Solo para diagram: a quién le toca según el texto. */
+    side_to_move: z.enum(["w", "b"]).nullable(),
     /** Fragmento LITERAL del texto del libro que contiene las jugadas o la lista de piezas. */
     quote: z.string(),
     /** Solo para piece_list: FEN construido a partir de la lista citada. */

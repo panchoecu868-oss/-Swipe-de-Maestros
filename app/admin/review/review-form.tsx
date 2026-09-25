@@ -22,7 +22,7 @@ export interface ReviewLesson {
   reviewed: boolean;
   rejected: boolean;
   reviewer_notes: string | null;
-  books: { title: string; author: string; year: number | null } | null;
+  books: { title: string; author: string; year: number | null; citation_unit?: string | null; public_domain?: boolean | null } | null;
   lesson_sources: { position_source: string; position_quote: string; moves_san: string[]; source_pages_text: string; model: string } | null;
 }
 
@@ -54,8 +54,9 @@ export function ReviewForm({ lesson }: { lesson: ReviewLesson }) {
             {lesson.books?.year ? ` (${lesson.books.year})` : ""}
           </p>
           <p>
-            {lesson.chapter} · pág. {lesson.page_start}
+            {lesson.chapter} · {lesson.books?.citation_unit === "sección" ? "secc." : "pág."} {lesson.page_start}
             {lesson.page_end !== lesson.page_start ? `–${lesson.page_end}` : ""}
+            {lesson.books?.public_domain ? " · dominio público" : ""}
           </p>
           {src && (
             <>

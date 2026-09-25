@@ -11,4 +11,10 @@ export const LESSON_PIPELINE = {
   CHAPTER_HEADING_RE: /^\s*(chapter|cap[ií]tulo|part|parte)\s+([ivxlc\d]+)\b/im,
   /** Sin índice ni encabezados: bloques de N páginas. */
   FALLBACK_PAGES_PER_CHUNK: 12,
+  /** Textos sin paginación original: líneas por "sección" citable. */
+  TXT_SECTION_LINES: 80,
+  /** Encabezados separados por menos líneas que esto se consideran del índice. */
+  TXT_MIN_CHAPTER_LINES: 40,
+  /** Máximo de páginas/secciones por llamada al modelo; capítulos más largos se parten. */
+  TXT_MAX_CHAPTER_UNITS: 16,
 } as const;

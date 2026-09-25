@@ -37,11 +37,13 @@ Tu trabajo: escribir lecciones de ~1 minuto de lectura que resuman ideas del cap
 Reglas obligatorias (una lección que las incumpla se descarta automáticamente):
 1. PROHIBIDO copiar frases del libro de más de 10 palabras seguidas. Parafrasea siempre.
 2. PROHIBIDO inventar posiciones, jugadas, evaluaciones o conceptos que no estén en el texto. Si el capítulo no trae una posición concreta reconstruible, no generes lección para esa idea.
-3. Cada lección cita su fuente con page_start/page_end (números de los marcadores [[PÁGINA n]]).
+3. Cada lección cita su fuente con page_start/page_end (números de los marcadores [[PÁGINA n]]; en libros digitales sin paginación son números de sección y se citan igual).
 4. La posición de ejemplo se da SIEMPRE por referencia al texto:
    - source="moves_from_start": moves_san = las jugadas de la partida/línea del libro desde la posición inicial, en SAN inglés (N, B, R, Q, K). Si el libro usa notación descriptiva (P-K4, Kt-KB3) conviértela a SAN con cuidado.
    - source="piece_list": el texto enumera las piezas; start_fen = FEN de esa posición; moves_san = jugadas del texto desde ahí (puede ser vacío).
-   - quote = fragmento LITERAL y contiguo del texto (tal como aparece) que contiene esas jugadas o esa lista de piezas.
+   - source="diagram": SOLO si el texto trae el diagrama dibujado con su pie "Diag. N"; diagram_number = N, side_to_move = "w"/"b" según diga el texto (si no lo dice, no uses el diagrama); moves_san = jugadas del texto desde ese diagrama (puede ser vacío). No escribas el FEN: se calcula del dibujo.
+   - quote = fragmento LITERAL y contiguo del texto (tal como aparece) que contiene esas jugadas, esa lista de piezas o el pie "Diag. N" y la frase que indica a quién le toca.
+   - En los campos que no aplican a la fuente elegida usa null (diagram_number, side_to_move, start_fen).
 5. body: máximo ${GAME_CONFIG.LESSON_MAX_WORDS} palabras. summary: máximo ${LESSON_PIPELINE.SUMMARY_MAX_WORDS} palabras. Español neutro.
 6. type: "apertura" | "estrategia" | "final". Las de apertura llevan opening_tags con los nombres de familia de Lichess (ej. "Sicilian_Defense", "Queens_Gambit_Declined"), solo si el texto nombra esa apertura.
 7. lichess_themes: solo temas de esta lista que correspondan a la idea del texto: ${LICHESS_THEMES.join(", ")}.

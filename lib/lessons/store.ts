@@ -7,17 +7,25 @@ export interface BookMeta {
   author: string;
   year?: number | null;
   license_note: string;
+  source_format?: "pdf" | "gutenberg_txt";
+  source_url?: string | null;
+  public_domain?: boolean;
+  gutenberg_id?: number | null;
 }
 
 export const sha256 = (data: Uint8Array | string) => createHash("sha256").update(data).digest("hex");
 
-export async function upsertBook(db: Client, meta: BookMeta, fileHash: string): Promise<string> {
+export async function upsertBook(db: Client, meta: BookMeta, fileHash: string, citationUnit: "página" | "sección" = "página"): Promise<string> {
   const { rows } = await db.query<{ id: string }>(
-    `insert into public.books (title, author, year, license_note, file_hash) values ($1, $2, $3, $4, $5)
+    `insert into public.books (title, author, year, license_note, file_hash, source_format, source_url, citation_unit, public_domain, gutenberg_id)
+     values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
      on conflict (file_hash) do update set title = excluded.title, author = excluded.author,
-       year = excluded.year, license_note = excluded.license_note
+       year = excluded.year, license_note = excluded.license_note, source_format = excluded.source_format,
+       source_url = excluded.source_url, citation_unit = excluded.citation_unit,
+       public_domain = excluded.public_domain, gutenberg_id = excluded.gutenberg_id
      returning id`,
-    [meta.title, meta.author, meta.year ?? null, meta.license_note, fileHash],
+    [meta.title, meta.author, meta.year ?? null, meta.license_note, fileHash, meta.source_format ?? "pdf", meta.source_url ?? null,
+      citationUnit, meta.public_domain ?? false, meta.gutenberg_id ?? null],
   );
   return rows[0].id;
 }

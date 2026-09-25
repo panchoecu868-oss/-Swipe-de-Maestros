@@ -1,7 +1,8 @@
 import type { Client } from "pg";
 import { LESSON_PIPELINE } from "@/config/lessons";
 import type { LessonGenerator } from "./generator";
-import { chapterPages, extractBook, type Chapter } from "./pdf";
+import { chapterPages, extractBook, type Chapter, type ExtractedBook } from "./pdf";
+import { extractTextBook } from "./text-source";
 import { insertLesson, sha256, upsertBook, type BookMeta } from "./store";
 import { validateLesson } from "./validate";
 
@@ -14,8 +15,13 @@ export interface PipelineLogEntry {
   lessonId?: string;
 }
 
+export type BookSource =
+  | { kind: "pdf"; bytes: Uint8Array }
+  /** Texto plano de Project Gutenberg; cutAtLastLine recorta partes ajenas al ajedrez. */
+  | { kind: "text"; text: string; cutAtLastLine?: RegExp };
+
 export interface PipelineOptions {
-  pdf: Uint8Array;
+  source: BookSource;
   meta: BookMeta;
   generator: LessonGenerator;
   db: Client | null; // null = dry run
@@ -35,9 +41,10 @@ export interface PipelineStats {
 }
 
 export async function runPipeline(o: PipelineOptions): Promise<PipelineStats> {
-  const book = await extractBook(o.pdf);
-  const bookHash = sha256(o.pdf);
-  const bookId = o.db ? await upsertBook(o.db, o.meta, bookHash) : "dry-run";
+  const book: ExtractedBook =
+    o.source.kind === "pdf" ? await extractBook(o.source.bytes) : extractTextBook(o.source.text, { cutAtLastLine: o.source.cutAtLastLine });
+  const bookHash = sha256(o.source.kind === "pdf" ? o.source.bytes : o.source.text);
+  const bookId = o.db ? await upsertBook(o.db, o.meta, bookHash, book.citationUnit) : "dry-run";
   const stats: PipelineStats = { chapters: 0, chapterSource: book.chapterSource, generated: 0, inserted: 0, rejected: 0, duplicates: 0, errors: 0 };
   const max = o.maxLessons ?? Infinity;
 
@@ -64,7 +71,7 @@ export async function runPipeline(o: PipelineOptions): Promise<PipelineStats> {
     for (const draft of out.lessons) {
       if (stats.inserted >= max) break;
       stats.generated++;
-      const v = validateLesson(draft, { chapter: ch.title, pages });
+      const v = validateLesson(draft, { chapter: ch.title, pages, diagrams: book.diagrams });
       if (!v.ok) {
         stats.rejected++;
         o.log({ at: now(), chapter: ch.title, kind: "rejected", title: draft.title, errors: v.errors });
@@ -75,7 +82,7 @@ export async function runPipeline(o: PipelineOptions): Promise<PipelineStats> {
         o.log({ at: now(), chapter: ch.title, kind: "inserted", title: draft.title });
         continue;
       }
-      const cited = [...pages.entries()].filter(([p]) => p >= draft.page_start && p <= draft.page_end).map(([p, t]) => `[[PÁGINA ${p}]]\n${t}`).join("\n\n");
+      const cited = [...pages.entries()].filter(([p]) => p >= draft.page_start && p <= draft.page_end).map(([p, t]) => `[[${book.citationUnit.toUpperCase()} ${p}]]\n${t}`).join("\n\n");
       const id = await insertLesson(o.db, {
         bookId,
         bookHash,

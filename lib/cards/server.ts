@@ -20,7 +20,7 @@ export interface UserContext {
 }
 
 export const LESSON_PUBLIC_COLUMNS =
-  "id, type, title, summary, body, fen, lichess_themes, opening_tags, topics, elo_min, elo_max, chapter, page_start, page_end, books(title, author, year)";
+  "id, type, title, summary, body, fen, lichess_themes, opening_tags, topics, elo_min, elo_max, chapter, page_start, page_end, books(title, author, year, citation_unit, public_domain, source_url)";
 
 /** Usuario autenticado + onboarding completo. Redirige si falta algo. */
 export async function requireUserContext(): Promise<UserContext> {

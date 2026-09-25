@@ -16,7 +16,8 @@
     "import:puzzles": "tsx scripts/import-puzzles.ts",
     "build:lessons": "tsx scripts/build-lessons.ts",
     "gen:openings": "tsx scripts/gen-opening-families.ts",
-    "postinstall": "node scripts/copy-stockfish.mjs"
+    "postinstall": "node scripts/copy-stockfish.mjs",
+    "books:fetch": "tsx scripts/fetch-public-domain.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

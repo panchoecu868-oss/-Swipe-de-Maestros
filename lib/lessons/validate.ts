@@ -2,13 +2,16 @@ import { Chess } from "chess.js";
 import { GAME_CONFIG } from "@/config/game";
 import { LESSON_PIPELINE } from "@/config/lessons";
 import { isLichessTheme } from "@/config/lichess-themes";
+import type { AsciiDiagram } from "./ascii-diagram";
 import type { LessonDraft } from "./schema";
 import { containsQuote, longestCopiedRun, wordCount } from "./text";
 
 export interface ChapterSource {
   chapter: string;
-  /** Texto por número de página (1-indexado, como se cita). */
+  /** Texto por número de página/sección (como se cita). */
   pages: Map<number, string>;
+  /** Diagramas del libro (parser determinista). */
+  diagrams?: AsciiDiagram[];
 }
 
 export interface ValidatedLesson {
@@ -22,10 +25,21 @@ export type ValidationResult = { ok: true; lesson: ValidatedLesson } | { ok: fal
 const INITIAL_FEN = new Chess().fen();
 
 /** Reconstruye la posición jugando las jugadas citadas. Lanza con mensaje claro si algo es ilegal. */
-export function buildPosition(draft: Pick<LessonDraft, "position">): { fen: string; movesUci: string[] } {
+export function buildPosition(draft: Pick<LessonDraft, "position">, diagrams: AsciiDiagram[] = []): { fen: string; movesUci: string[] } {
   const { source, start_fen, moves_san } = draft.position;
   let chess: Chess;
-  if (source === "piece_list") {
+  if (source === "diagram") {
+    const n = draft.position.diagram_number;
+    const side = draft.position.side_to_move;
+    if (n === null || !side) throw new Error("diagram sin diagram_number o side_to_move");
+    const d = diagrams.find((x) => x.number === n);
+    if (!d) throw new Error(`El libro no tiene un diagrama ${n} legible`);
+    try {
+      chess = new Chess(`${d.placement} ${side} - - 0 1`);
+    } catch (e) {
+      throw new Error(`Diagrama ${n} no forma una posición legal: ${(e as Error).message}`);
+    }
+  } else if (source === "piece_list") {
     if (!start_fen) throw new Error("piece_list sin start_fen");
     try {
       chess = new Chess(start_fen);
@@ -84,10 +98,15 @@ export function validateLesson(draft: LessonDraft, src: ChapterSource): Validati
   if (draft.position.source === "moves_from_start" && draft.position.moves_san.length === 0) {
     errors.push("moves_from_start sin jugadas");
   }
+  if (draft.position.source === "diagram") {
+    const n = draft.position.diagram_number;
+    const caption = new RegExp(`Diag(?:ram)?\\.?\\s*${n}\\b`, "i");
+    if (n === null || !caption.test(citedText)) errors.push(`el diagrama ${n} no está en las páginas citadas`);
+  }
 
   let position: { fen: string; movesUci: string[] } | null = null;
   try {
-    position = buildPosition(draft);
+    position = buildPosition(draft, src.diagrams);
   } catch (e) {
     errors.push((e as Error).message);
   }

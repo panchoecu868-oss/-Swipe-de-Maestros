@@ -30,7 +30,7 @@ export default async function ReviewPage({ searchParams }: PageProps<"/admin/rev
 
   const { data: lesson } = await db
     .from("lessons")
-    .select("*, books(title, author, year), lesson_sources(position_source, position_quote, moves_san, source_pages_text, model)")
+    .select("*, books(title, author, year, citation_unit, public_domain, source_url), lesson_sources(position_source, position_quote, moves_san, source_pages_text, model)")
     .eq("id", targetId)
     .single();
 
