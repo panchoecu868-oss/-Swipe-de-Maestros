@@ -49,3 +49,6 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 !.env.example
+
+# Stockfish se copia en postinstall (GPL-3.0, ver LICENSES.md)
+/public/stockfish/

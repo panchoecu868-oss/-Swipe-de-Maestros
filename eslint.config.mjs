@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Binarios de terceros copiados en postinstall (Stockfish, GPL-3.0).
+    "public/stockfish/**",
   ]),
 ]);
 

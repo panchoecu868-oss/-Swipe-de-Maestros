@@ -1,0 +1,30 @@
+/**
+ * Datos SOLO para el harness de pruebas E2E. Los puzzles son las filas reales de la muestra oficial
+ * de database.lichess.org (tests/fixtures/lichess_puzzles_sample.csv). La "lección" es un placeholder
+ * explícito sin contenido ajedrecístico.
+ */
+import type { CardLesson } from "@/components/feed/LessonCard";
+
+export const HARNESS_PUZZLES = [
+  { id: "00sHx", fen: "q3k1nr/1pp1nQpp/3p4/1P2p3/4P3/B1PP1b2/B5PP/5K2 b k - 0 17", moves: ["e8d7", "a2e6", "d7d8", "f7f8"], rating: 1760 },
+  { id: "00sJ9", fen: "r3r1k1/p4ppp/2p2n2/1p6/3P1qb1/2NQR3/PPB2PP1/R1B3K1 w - - 5 18", moves: ["e3g3", "e8e1", "g1h2", "e1c1", "a1c1", "f4h6", "h2g1", "h6c1"], rating: 2671 },
+  { id: "00sJb", fen: "Q1b2r1k/p2np2p/5bp1/q7/5P2/4B3/PPP3PP/2KR1B1R w - - 1 17", moves: ["d1d7", "a5e1", "d7d1", "e1e3", "c1b1", "e3b6"], rating: 2235 },
+  { id: "00sO1", fen: "1k1r4/pp3pp1/2p1p3/4b3/P3n1P1/8/KPP2PN1/3rBR1R b - - 2 31", moves: ["b8c7", "e1a5", "b7b6", "f1d1"], rating: 998 },
+];
+
+export const HARNESS_LESSON: CardLesson = {
+  id: "harness-lesson",
+  type: "estrategia",
+  title: "[FIXTURE] Carta de prueba",
+  summary: "Texto de relleno para pruebas automáticas.",
+  body: "Texto de relleno para pruebas automáticas. No es una lección real.",
+  fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+  lichess_themes: [],
+  topics: [],
+  elo_min: 1000,
+  elo_max: 2200,
+  chapter: "Fixture",
+  page_start: 1,
+  page_end: 1,
+  books: { title: "Fixture", author: "Tests", year: null },
+};

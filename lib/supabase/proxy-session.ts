@@ -5,6 +5,9 @@ import { isSupabaseConfigured, publicEnv } from "@/lib/env";
 /** Rutas que exigen sesión. La landing, términos y login son públicos. */
 export const PROTECTED_PREFIXES = ["/onboarding", "/feed", "/jugar", "/progreso", "/admin"];
 
+/** Pantallas de acceso: si ya hay sesión, se salta al feed. */
+export const AUTH_PAGES = ["/login", "/registro"];
+
 export function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
@@ -31,6 +34,12 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const isLoggedIn = Boolean(data?.claims?.sub);
 
+  if (isLoggedIn && AUTH_PAGES.includes(request.nextUrl.pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/feed";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
   if (!isLoggedIn && isProtectedPath(request.nextUrl.pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";

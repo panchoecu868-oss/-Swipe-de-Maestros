@@ -1,0 +1,49 @@
+import { z } from "zod";
+import { LICHESS_THEMES } from "@/config/lichess-themes";
+import { OPENING_TOPIC, TOPIC_IDS } from "@/config/self-assessment";
+
+export const LESSON_TOPICS = [...TOPIC_IDS, OPENING_TOPIC] as const;
+
+/**
+ * Forma que el modelo DEBE devolver (structured outputs).
+ * La posición nunca se pide como FEN libre: se reconstruye jugando las jugadas citadas
+ * del texto, así chess.js puede verificarla y el revisor ve la cita literal.
+ */
+export const LessonDraftSchema = z.object({
+  type: z.enum(["apertura", "estrategia", "final"]),
+  title: z.string(),
+  summary: z.string(),
+  body: z.string(),
+  position: z.object({
+    /**
+     * moves_from_start: jugadas desde la posición inicial. piece_list: el texto enumera las piezas.
+     * diagram: el libro trae el diagrama dibujado (texto de Gutenberg); el FEN lo calcula el parser, no el modelo.
+     */
+    source: z.enum(["moves_from_start", "piece_list", "diagram"]),
+    /** Solo para diagram: número del diagrama ("Diag. 4" → 4). */
+    diagram_number: z.number().int().nullable(),
+    /** Solo para diagram: a quién le toca según el texto. */
+    side_to_move: z.enum(["w", "b"]).nullable(),
+    /** Fragmento LITERAL del texto del libro que contiene las jugadas o la lista de piezas. */
+    quote: z.string(),
+    /** Solo para piece_list: FEN construido a partir de la lista citada. */
+    start_fen: z.string().nullable(),
+    /** Jugadas en SAN (convertidas si el libro usa notación descriptiva). */
+    moves_san: z.array(z.string()),
+  }),
+  /** Temas de autoevaluación que trabaja la lección (conecta con theme_weights). */
+  topics: z.array(z.enum(LESSON_TOPICS)),
+  lichess_themes: z.array(z.enum(LICHESS_THEMES)),
+  opening_tags: z.array(z.string()),
+  elo_min: z.number().int(),
+  elo_max: z.number().int(),
+  page_start: z.number().int(),
+  page_end: z.number().int(),
+});
+
+export const LessonBatchSchema = z.object({
+  lessons: z.array(LessonDraftSchema),
+});
+
+export type LessonDraft = z.infer<typeof LessonDraftSchema>;
+export type LessonBatch = z.infer<typeof LessonBatchSchema>;

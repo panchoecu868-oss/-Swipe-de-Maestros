@@ -2,7 +2,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient as createPlainClient } from "@supabase/supabase-js";
-import { publicEnv, serverEnv } from "@/lib/env";
+import { isSupabaseConfigured, publicEnv, serverEnv } from "@/lib/env";
 
 /** Cliente con la sesión del usuario (RLS aplica). */
 export async function createClient() {
@@ -33,7 +33,9 @@ export function createServiceClient() {
   });
 }
 
+/** null si no hay sesión o si Supabase aún no está configurado (las páginas redirigen a /login). */
 export async function getCurrentUser() {
+  if (!isSupabaseConfigured()) return null;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   return data.user;

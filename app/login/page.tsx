@@ -1,23 +1,38 @@
+import Link from "next/link";
+import { AuthShell, Divider, GoogleButton, NotConfigured } from "@/components/auth/AuthUI";
 import { isSupabaseConfigured } from "@/lib/env";
+import { safeNextPath } from "@/lib/safe-redirect";
 import { LoginForm } from "./login-form";
 
 export const metadata = { title: "Entrar · Swipe de Maestros" };
 
+const MESSAGES: Record<string, string> = {
+  auth: "No pudimos validar el enlace. Pide uno nuevo.",
+  confirmado: "Correo confirmado. Ya puedes entrar.",
+  contrasena: "Contraseña actualizada. Entra con la nueva.",
+};
+
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const params = await searchParams;
-  const next = typeof params.next === "string" ? params.next : "/feed";
-  const error = params.error === "auth";
+  const next = safeNextPath(typeof params.next === "string" ? params.next : null);
+  const msgKey = typeof params.error === "string" ? params.error : typeof params.ok === "string" ? params.ok : "";
+  const configured = isSupabaseConfigured();
   return (
-    <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-6 px-4">
-      <h1 className="text-2xl font-bold">Entrar</h1>
-      {error && <p role="alert" className="text-sm text-red-600 dark:text-red-400">No pudimos validar el enlace. Pide uno nuevo.</p>}
-      {isSupabaseConfigured() ? (
-        <LoginForm next={next} />
-      ) : (
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Supabase no está configurado. Copia <code>.env.example</code> a <code>.env.local</code> y completa las claves.
-        </p>
+    <AuthShell
+      title="Entrar"
+      footer={
+        <>
+          ¿No tienes cuenta? <Link href={`/registro?next=${encodeURIComponent(next)}`} className="font-semibold underline">Crear cuenta</Link>
+        </>
+      }
+    >
+      {MESSAGES[msgKey] && (
+        <p role={params.error ? "alert" : "status"} className={`text-sm ${params.error ? "text-danger" : "text-accent"}`}>{MESSAGES[msgKey]}</p>
       )}
-    </main>
+      {!configured && <NotConfigured />}
+      <GoogleButton next={next} configured={configured} />
+      <Divider />
+      <LoginForm next={next} configured={configured} />
+    </AuthShell>
   );
 }

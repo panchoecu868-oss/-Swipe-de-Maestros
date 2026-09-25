@@ -41,6 +41,15 @@ describe("esquema y RLS", () => {
     expect(rows.map((r) => r.id)).toEqual([ALICE, BOB, ADMIN].sort());
   });
 
+  it("guarda el nombre del registro o de Google en display_name", async () => {
+    const A = "00000000-0000-4000-8000-0000000000f1";
+    const B = "00000000-0000-4000-8000-0000000000f2";
+    await db.query(`insert into auth.users (id, email, raw_user_meta_data) values ($1, 'a@x.co', '{"full_name":"  Ana Pérez "}'), ($2, 'b@x.co', '{"name":"Beto"}')`, [A, B]);
+    const { rows } = await db.query("select id, display_name from public.profiles where id in ($1, $2) order by id", [A, B]);
+    expect(rows.map((r) => r.display_name)).toEqual(["Ana Pérez", "Beto"]);
+    await db.query("delete from auth.users where id in ($1, $2)", [A, B]);
+  });
+
   it("cada usuario solo ve su propio perfil", async () => {
     const rows = await asUser(db, ALICE, async () => (await db.query("select id from public.profiles")).rows);
     expect(rows).toEqual([{ id: ALICE }]);

@@ -19,6 +19,7 @@ export default defineConfig({
   projects: [{ name: "mobile", use: { ...devices["Pixel 7"], launchOptions: executablePath ? { executablePath } : {} } }],
   webServer: {
     command: `npm run build && npx next start -p ${port}`,
+    env: { ENABLE_TEST_HARNESS: "1" },
     url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
