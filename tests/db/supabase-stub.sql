@@ -10,7 +10,8 @@ end $$;
 create schema if not exists auth;
 create table if not exists auth.users (
   id uuid primary key,
-  email text
+  email text,
+  raw_user_meta_data jsonb not null default '{}'::jsonb
 );
 
 -- Igual que Supabase: sub del JWT leído desde la GUC request.jwt.claims.

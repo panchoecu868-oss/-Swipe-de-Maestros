@@ -1,53 +1,42 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Field } from "@/components/auth/AuthUI";
+import { authErrorMessage, fieldErrors, LoginSchema } from "@/lib/auth/validation";
 import { createClient } from "@/lib/supabase/client";
-import { safeNextPath } from "@/lib/safe-redirect";
 
-export function LoginForm({ next }: { next: string }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const redirectTo = () =>
-    `${window.location.origin}/auth/callback?next=${encodeURIComponent(safeNextPath(next))}`;
+export function LoginForm({ next, configured }: { next: string; configured: boolean }) {
+  const router = useRouter();
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sending, setSending] = useState(false);
 
-  async function sendMagicLink(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
-    const { error } = await createClient().auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: redirectTo() },
-    });
-    setStatus(error ? "error" : "sent");
-  }
-
-  async function google() {
-    await createClient().auth.signInWithOAuth({ provider: "google", options: { redirectTo: redirectTo() } });
+    const f = new FormData(e.currentTarget);
+    const parsed = LoginSchema.safeParse({ email: f.get("email"), password: f.get("password") });
+    if (!parsed.success) return setErrors(fieldErrors(parsed.error));
+    if (!configured) return setErrors({ form: "Supabase no está configurado todavía." });
+    setErrors({});
+    setSending(true);
+    const { error } = await createClient().auth.signInWithPassword(parsed.data);
+    if (error) {
+      setSending(false);
+      return setErrors({ form: authErrorMessage(error.message) });
+    }
+    router.push(next);
+    router.refresh();
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <button type="button" onClick={google} className="btn-secondary">
-        Continuar con Google
+    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3">
+      <Field label="Correo" name="email" type="email" autoComplete="email" inputMode="email" required error={errors.email} />
+      <Field label="Contraseña" name="password" type="password" autoComplete="current-password" required error={errors.password} />
+      <Link href="/recuperar" className="-mt-1 self-end text-xs underline">¿Olvidaste tu contraseña?</Link>
+      {errors.form && <p role="alert" className="text-sm text-danger">{errors.form}</p>}
+      <button type="submit" className="btn-primary" disabled={sending}>
+        {sending ? "Entrando…" : "Entrar"}
       </button>
-      <form onSubmit={sendMagicLink} className="flex flex-col gap-3">
-        <label className="flex flex-col gap-1 text-sm">
-          Email
-          <input
-            type="email"
-            required
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input"
-          />
-        </label>
-        <button type="submit" disabled={status === "sending"} className="btn-primary">
-          {status === "sending" ? "Enviando…" : "Enviarme un enlace"}
-        </button>
-      </form>
-      <p aria-live="polite" className="text-sm">
-        {status === "sent" && "Revisa tu correo: te mandamos el enlace de acceso."}
-        {status === "error" && "No se pudo enviar el enlace. Intenta de nuevo."}
-      </p>
-    </div>
+    </form>
   );
 }

@@ -14,7 +14,7 @@ test("manifest instalable y service worker activo", async ({ page, request }) =>
   expect(sw.headers()["cache-control"]).toContain("no-cache");
 });
 
-for (const path of ["/", "/login", "/garantia/terminos", "/licencias", "/dev/harness?view=swipe", "/dev/harness?view=puzzle"]) {
+for (const path of ["/", "/login", "/registro", "/recuperar", "/garantia/terminos", "/licencias", "/dev/harness?view=swipe", "/dev/harness?view=puzzle"]) {
   test(`sin violaciones graves de accesibilidad: ${path}`, async ({ page }) => {
     await page.goto(path);
     await page.waitForLoadState("networkidle");

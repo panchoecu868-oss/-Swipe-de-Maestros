@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const plan = request.nextUrl.searchParams.get("plan") === "yearly" ? "yearly" : "monthly";
   const user = await getCurrentUser();
   if (!user) {
-    const url = new URL("/login", request.url);
+    const url = new URL("/registro", request.url);
     url.searchParams.set("next", `/suscribirse?plan=${plan}`);
     return NextResponse.redirect(url);
   }

@@ -21,9 +21,25 @@ npm run dev                 # http://localhost:3000
 ```
 
 En Supabase:
-1. **Authentication → Providers**: activa Email (magic link) y Google (con tu Client ID/Secret de Google Cloud).
-2. **Authentication → URL Configuration**: agrega `http://localhost:3000/auth/callback` y la URL de producción `/auth/callback` a *Redirect URLs*.
-3. Hazte admin (una sola vez, en el SQL editor): `update public.profiles set is_admin = true where email = 'tu@email.com';` y pon ese mismo email en `ADMIN_EMAIL`.
+1. **Authentication → Providers**: activa **Email** (con "Confirm email" encendido) y **Google** (Client ID/Secret de Google Cloud; en Google Cloud agrega como URI de redirección la callback que te muestra Supabase).
+2. **Authentication → URL Configuration**: *Site URL* = tu dominio (o `http://localhost:3000`) y en *Redirect URLs* agrega `http://localhost:3000/**` y `https://TU_DOMINIO/**`.
+3. **Authentication → Email Templates** (patrón oficial `token_hash`, funciona aunque el correo se abra en otro dispositivo; ver https://supabase.com/docs/guides/auth/passwords):
+   - *Confirm signup*: `<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/onboarding">Confirmar mi cuenta</a>`
+   - *Reset password*: `<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next=/nueva-contrasena">Elegir nueva contraseña</a>`
+
+   Si no cambias las plantillas también funciona vía `/auth/callback`, pero solo cuando el enlace se abre en el mismo navegador donde se hizo el registro.
+4. Hazte admin (una sola vez, en el SQL editor): `update public.profiles set is_admin = true where email = 'tu@email.com';` y pon ese mismo email en `ADMIN_EMAIL`.
+
+### Cuentas de usuario
+
+| Ruta | Qué hace |
+|---|---|
+| `/registro` | Nombre, correo, contraseña (8+ con letra y número), confirmación y aceptación de términos; o **Registrarme con Google**. Tras confirmar el correo va al onboarding |
+| `/login` | Correo + contraseña o Google; enlace a recuperar contraseña |
+| `/recuperar` → `/nueva-contrasena` | Enlace por correo para cambiar la contraseña (no revela si la cuenta existe) |
+| `/auth/confirm`, `/auth/callback` | Confirmación por `token_hash` y retorno de OAuth/PKCE |
+
+El nombre se guarda en `profiles.display_name` (del formulario o del perfil de Google).
 
 ## 2. Variables de entorno
 

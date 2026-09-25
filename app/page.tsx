@@ -35,7 +35,7 @@ export default function Home() {
           Lecciones de 1 minuto sacadas de los libros clásicos, puzzles de Lichess del mismo motivo y la posición lista para jugarla contra Stockfish. Desliza, aprende, repite.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/login?next=/onboarding" className="btn-primary">Probar {GAME_CONFIG.DEMO_CARDS} cartas gratis</Link>
+          <Link href="/registro" className="btn-primary">Crear cuenta: {GAME_CONFIG.DEMO_CARDS} cartas gratis</Link>
           <a href="#precios" className="btn-secondary">Ver precios</a>
         </div>
         <p className="text-sm">
@@ -103,6 +103,7 @@ export default function Home() {
       <footer className="flex flex-wrap justify-center gap-4 border-t border-border pt-6 text-sm text-muted">
         <Link href="/garantia/terminos">Términos de la garantía</Link>
         <Link href="/licencias">Licencias</Link>
+        <Link href="/registro">Crear cuenta</Link>
         <Link href="/login">Entrar</Link>
       </footer>
     </main>
