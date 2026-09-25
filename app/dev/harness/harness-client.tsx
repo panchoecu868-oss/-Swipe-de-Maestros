@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { DiscardRound } from "@/components/feed/DiscardRound";
+import { EngineGame } from "@/components/game/EngineGame";
+import { engineModeFor } from "@/lib/engine/strength";
 import { LessonCard } from "@/components/feed/LessonCard";
 import { SwipeCard } from "@/components/feed/SwipeCard";
 import { PuzzlePlayer } from "@/components/puzzle/PuzzlePlayer";
@@ -33,6 +35,14 @@ export function HarnessClient({ view, limitMs, forced }: { view: string; limitMs
           puzzles={HARNESS_PUZZLES.slice(0, 3)}
           limitMs={limitMs}
           onFinish={(s) => push(JSON.stringify(s.submitted.map((x) => ({ id: x.puzzleId, moves: x.moves }))))}
+        />
+      )}
+      {view === "engine" && (
+        <EngineGame
+          startFen={HARNESS_LESSON.fen}
+          lessonType={HARNESS_LESSON.type}
+          engineMode={engineModeFor(limitMs)}
+          onFinished={(r) => push(JSON.stringify({ met: r.objectiveMet, moves: r.movesUci.length }))}
         />
       )}
       <output data-testid="log" className="w-full break-all font-mono text-xs">

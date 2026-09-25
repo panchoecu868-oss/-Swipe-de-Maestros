@@ -81,3 +81,23 @@ test.describe("ronda de descarte", () => {
     await expect(log(page)).toHaveText("[]");
   });
 });
+
+test.describe("Stockfish WASM en el navegador", () => {
+  test("carga el motor en un Web Worker, evalúa, fija objetivo y responde con fuerza limitada", async ({ page }) => {
+    // limit se reutiliza como ELO del usuario en esta vista: 1100 → modo Skill Level.
+    await page.goto("/dev/harness?view=engine&limit=1100");
+    await expect(page.getByText(/Sobrevive 10 jugadas/)).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId("game-meta")).toContainText("Motor: nivel 2");
+    await page.locator('[data-square="b1"]').first().click();
+    await page.locator('[data-square="c3"]').first().click();
+    await expect(page.getByTestId("game-meta")).toContainText("Jugada 1/10");
+    await expect(page.getByText("Stockfish piensa…")).toBeHidden({ timeout: 20_000 });
+    // El motor movió: ya no es turno de negras, la posición cambió respecto a tras Cc3.
+    await expect(page.locator('[data-square="c3"] [data-piece]')).toHaveCount(1);
+  });
+
+  test("con ELO ≥ 1320 usa UCI_Elo", async ({ page }) => {
+    await page.goto("/dev/harness?view=engine&limit=1700");
+    await expect(page.getByTestId("game-meta")).toContainText("Motor: ELO 1700", { timeout: 30_000 });
+  });
+});
